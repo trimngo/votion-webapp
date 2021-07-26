@@ -15,7 +15,7 @@ function App() {
             <input type="password" placeholder="Password" class=" border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-indigo-600 rounded-md" />
             <div class="flex justify-between items-baseline">
               <button class="mt-4 bg-indigo-500 text-white py-2 px-6 rounded-lg">Login</button>
-              <a href="#" class="text-sm hover:underline">Forgot password?</a>
+              <button class="text-sm hover:underline">Forgot password?</button>
             </div>
           </div>
         </div>
