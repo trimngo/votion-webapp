@@ -430,7 +430,7 @@ export default function Example() {
                 </nav>
               </div>
               <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-                <a href="#" className="flex-shrink-0 group block">
+                <a href="." className="flex-shrink-0 group block">
                   <div className="flex items-center">
                     <div>
                       <img className="inline-block h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
@@ -504,7 +504,7 @@ export default function Example() {
               </nav>
             </div>
             <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-              <a href="#" className="flex-shrink-0 w-full group block">
+              <a href="." className="flex-shrink-0 w-full group block">
                 <div className="flex items-center">
                   <div>
                     <img className="inline-block h-9 w-9 rounded-full" src={user.imageUrl} alt="" />
@@ -545,7 +545,7 @@ export default function Example() {
           <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             {/* Breadcrumb */}
             <nav className="flex items-start px-4 py-3 sm:px-6 lg:px-8 xl:hidden" aria-label="Breadcrumb">
-              <a href="#" className="inline-flex items-center space-x-3 text-sm font-medium text-gray-900">
+              <a href="." className="inline-flex items-center space-x-3 text-sm font-medium text-gray-900">
                 <ChevronLeftIcon className="-ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                 <span>Directory</span>
               </a>
@@ -651,7 +651,7 @@ export default function Example() {
                         <img className="h-10 w-10 rounded-full" src={person.imageUrl} alt="" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <a href="#" className="focus:outline-none">
+                        <a href="." className="focus:outline-none">
                           <span className="absolute inset-0" aria-hidden="true" />
                           <p className="text-sm font-medium text-gray-900">{person.name}</p>
                           <p className="text-sm text-gray-500 truncate">{person.role}</p>
@@ -709,7 +709,7 @@ export default function Example() {
                             <img className="h-10 w-10 rounded-full" src={person.imageUrl} alt="" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <a href="#" className="focus:outline-none">
+                            <a href="." className="focus:outline-none">
                               {/* Extend touch target to entire panel */}
                               <span className="absolute inset-0" aria-hidden="true" />
                               <p className="text-sm font-medium text-gray-900">{person.name}</p>
