@@ -37,47 +37,32 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 
 }
-const navigation = [
 
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Teams', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Directory', href: '#', icon: SearchCircleIcon, current: false },
-  { name: 'Announcements', href: '#', icon: SpeakerphoneIcon, current: false },
-  { name: 'Office Map', href: '#', icon: MapIcon, current: false },
-
-]
 const secondaryNavigation = [
 
-  { name: 'Apps', href: '#', icon: ViewGridAddIcon },
+  
   { name: 'Settings', href: '#', icon: CogIcon },
 
 ]
 const tabs = [
 
   { name: 'Profile', href: '#', current: true },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Recognition', href: '#', current: false },
+  { name: 'My Calendar', href: '#', current: false },
+  
 
 ]
 const profile = {
 
-  name: 'Ricardo Cooper',
+  name: 'Rachael Ann',
   imageUrl:
-    'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+    'https://static.wixstatic.com/media/5c4159_b9277cd39c6c4a409eca92427b655ae4~mv2.jpg/v1/fill/w_401,h_410,al_c,q_80,usm_0.66_1.00_0.01/5c4159_b9277cd39c6c4a409eca92427b655ae4~mv2.jpg',
   coverImageUrl:
-    'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+    'https://static.wixstatic.com/media/5c4159_61a8365dc11a44c48707472895518e96~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01/5c4159_61a8365dc11a44c48707472895518e96~mv2.jpg',
   about:
-    '\n        <p>\n          Tincidunt quam neque in cursus viverra orci, dapibus nec tristique. Nullam ut sit dolor consectetur urna, dui cras nec sed. Cursus risus congue arcu aenean posuere aliquam.\n        </p>\n        <p>\n          Et vivamus lorem pulvinar nascetur non. Pulvinar a sed platea rhoncus ac mauris amet. Urna, sem pretium sit pretium urna, senectus vitae. Scelerisque fermentum, cursus felis dui suspendisse velit pharetra. Augue et duis cursus maecenas eget quam lectus. Accumsan vitae nascetur pharetra rhoncus praesent dictum risus suspendisse.\n        </p>\n      ',
+    '\n        <p>\n          I love good coffee, adventures, and inclusive democracy.\n        </p>\n      ',
   fields: {
-    Phone: '(555) 123-4567',
-    Email: 'ricardocooper@example.com',
-    Title: 'Senior Front-End Developer',
-    Team: 'Product Development',
-    Location: 'San Francisco',
-    Sits: 'Oasis, 4th floor',
-    Salary: '$145,000',
-    Birthday: 'June 8, 1990',
+    Email: 'rachael@earthmpower.com',
+    Location: 'Guatemala',
   },
 
 }
@@ -86,29 +71,29 @@ const directory = {
   A: [
     {
       id: 1,
-      name: 'Leslie Abbott',
-      role: 'Co-Founder / CEO',
+      name: 'Women in the Workforce',
+      role: 'Participant',
       imageUrl:
         'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
     {
       id: 2,
-      name: 'Hector Adams',
-      role: 'VP, Marketing',
+      name: 'BiPOC Voices in Art and Democracy',
+      role: 'Ally',
       imageUrl:
         'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
     {
       id: 3,
-      name: 'Blake Alexander',
-      role: 'Account Coordinator',
+      name: 'Queer Neurodivergent Spaces',
+      role: 'Team Leader',
       imageUrl:
         'https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
     {
       id: 4,
-      name: 'Fabricio Andrews',
-      role: 'Senior Art Director',
+      name: 'Food Security',
+      role: 'Ally',
       imageUrl:
         'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
@@ -290,30 +275,30 @@ const directory = {
 const team = [
 
   {
-    name: 'Leslie Alexander',
+    name: 'Food Security',
     handle: 'lesliealexander',
-    role: 'Co-Founder / CEO',
+    role: 'Ally',
     imageUrl:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    name: 'Michael Foster',
+    name: 'Women Empower Things in Their Community',
     handle: 'michaelfoster',
-    role: 'Co-Founder / CTO',
+    role: 'Leader',
     imageUrl:
       'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    name: 'Dries Vincent',
+    name: 'Queer Coders for Inclusivity',
     handle: 'driesvincent',
-    role: 'Manager, Business Relations',
+    role: 'Participant',
     imageUrl:
       'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
   {
-    name: 'Lindsay Walton',
+    name: 'Cleaning up Parks',
     handle: 'lindsaywalton',
-    role: 'Front-end Developer',
+    role: 'Participant',
     imageUrl:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
@@ -388,28 +373,7 @@ export default function Example() {
                 </div>
                 <nav aria-label="Sidebar" className="mt-5">
                   <div className="px-2 space-y-1">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                          'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        <item.icon
-                          className={classNames(
-                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-4 h-6 w-6'
-                          )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </a>
-                    ))}
+                    
                   </div>
                   <hr className="border-t border-gray-200 my-5" aria-hidden="true" />
                   <div className="px-2 space-y-1">
@@ -459,34 +423,13 @@ export default function Example() {
               <div className="flex items-center flex-shrink-0 px-4">
                 <img
                   className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-pink-500-mark-gray-900-text.svg"
+                  src="https://static.wixstatic.com/media/5c4159_61a8365dc11a44c48707472895518e96~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01/5c4159_61a8365dc11a44c48707472895518e96~mv2.jpg"
                   alt="Workflow"
                 />
               </div>
               <nav className="mt-5 flex-1" aria-label="Sidebar">
                 <div className="px-2 space-y-1">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        item.current
-                          ? 'bg-gray-200 text-gray-900'
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                        'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                      )}
-                      aria-current={item.current ? 'page' : undefined}
-                    >
-                      <item.icon
-                        className={classNames(
-                          item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                          'mr-3 h-6 w-6'
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
-                  ))}
+                  
                 </div>
                 <hr className="border-t border-gray-200 my-5" aria-hidden="true" />
                 <div className="flex-1 px-2 space-y-1">
@@ -629,7 +572,7 @@ export default function Example() {
                     </div>
                   ))}
                   <div className="sm:col-span-2">
-                    <dt className="text-sm font-medium text-gray-500">About</dt>
+                    <dt className="text-medium font-medium text-black-500">About</dt>
                     <dd
                       className="mt-1 max-w-prose text-sm text-gray-900 space-y-5"
                       dangerouslySetInnerHTML={{ __html: profile.about }}
@@ -640,7 +583,7 @@ export default function Example() {
 
               {/* Team member list */}
               <div className="mt-8 max-w-5xl mx-auto px-4 pb-12 sm:px-6 lg:px-8">
-                <h2 className="text-sm font-medium text-gray-500">Team members</h2>
+                <h2 className="text-medium font-medium text-black-500">My Projects</h2>
                 <div className="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {team.map((person) => (
                     <div
@@ -728,4 +671,5 @@ export default function Example() {
       </div>
     </div>
   )
+  
 }
