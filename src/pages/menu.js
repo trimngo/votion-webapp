@@ -37,16 +37,7 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 
 }
-const navigation = [
 
-  { name: 'I KNOW ITS THE CODE', href: '#', icon: HomeIcon, current: true },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'My Groups', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'My Ideas', href: '#', icon: SearchCircleIcon, current: false },
-  { name: 'Votes', href: '#', icon: SpeakerphoneIcon, current: false },
-  { name: 'Event Map', href: '#', icon: MapIcon, current: false },
-
-]
 const secondaryNavigation = [
 
   
@@ -382,28 +373,7 @@ export default function Example() {
                 </div>
                 <nav aria-label="Sidebar" className="mt-5">
                   <div className="px-2 space-y-1">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                          'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        <item.icon
-                          className={classNames(
-                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-4 h-6 w-6'
-                          )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </a>
-                    ))}
+                    
                   </div>
                   <hr className="border-t border-gray-200 my-5" aria-hidden="true" />
                   <div className="px-2 space-y-1">
@@ -459,28 +429,7 @@ export default function Example() {
               </div>
               <nav className="mt-5 flex-1" aria-label="Sidebar">
                 <div className="px-2 space-y-1">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        item.current
-                          ? 'bg-gray-200 text-gray-900'
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                        'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                      )}
-                      aria-current={item.current ? 'page' : undefined}
-                    >
-                      <item.icon
-                        className={classNames(
-                          item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                          'mr-3 h-6 w-6'
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
-                  ))}
+                  
                 </div>
                 <hr className="border-t border-gray-200 my-5" aria-hidden="true" />
                 <div className="flex-1 px-2 space-y-1">
