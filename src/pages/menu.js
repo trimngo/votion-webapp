@@ -30,6 +30,8 @@ import {
 } from '@heroicons/react/outline'
 import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
 
+import BasicCard from "./BasicCard";
+
 const user = {
 
   name: 'Tom Cook',
@@ -578,6 +580,9 @@ export default function Example() {
                       dangerouslySetInnerHTML={{ __html: profile.about }}
                     />
                   </div>
+
+                  <BasicCard />
+
                 </dl>
               </div>
 
@@ -665,11 +670,13 @@ export default function Example() {
                   </ul>
                 </div>
               ))}
+              
             </nav>
           </aside>
         </div>
+        <BasicCard />
       </div>
     </div>
   )
-  
+
 }
