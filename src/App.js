@@ -3,9 +3,11 @@ import Navbar from './components/Navbar';
 import { Switch, Route } from 'react-router-dom';
 import Home from './pages';
 import About from './pages/about';
+import Delegation from './pages/delegation';
 import Menu from './pages/menu';
 import Footer from './components/Footer';
 import Dropdown from './components/Dropdown';
+import Create from './pages/create';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +39,8 @@ function App() {
         <Route path='/' exact component={Home} />
         <Route path='/menu' component={Menu} />
         <Route path='/about' component={About} />
+        <Route path='/delegation' component={Delegation} />
+        <Route path='/create' component={Create} />
       </Switch>
       <Footer />
     </>
