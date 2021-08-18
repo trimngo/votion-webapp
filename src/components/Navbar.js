@@ -52,7 +52,10 @@ const Navbar = ({ toggle }) => {
           Projects   
         </Link>
         <Link to='/delegation' className='p-2'>
-          Help
+          Delegation
+        </Link>
+        <Link to='/forgotpass' className='p-2'>
+          Forgot Password
         </Link>
       </div>
     </nav>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 const Hero = () => {
   return (
@@ -14,7 +16,10 @@ const Hero = () => {
             <input type="password" placeholder="Password" class=" border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-indigo-600 rounded-md" />
             <div class="flex justify-between items-baseline">
               <button class="mt-3 bg-yellow-600 text-white py-2 px-5 rounded-lg">Login</button>
-              <button class="text-vs hover:underline">Forgot password?</button>
+              
+              <button class="text-vs hover:underline">
+                <Link to='/forgotpass' className='p-2'>Forgot Password</Link>
+              </button>
               <button class="text-vs hover:underline">New user?</button>
             </div>
           </div>
