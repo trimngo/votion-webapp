@@ -13,8 +13,9 @@ const Hero = () => {
             <label class="block mt-3 font-semibold">Password</label>
             <input type="password" placeholder="Password" class=" border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-indigo-600 rounded-md" />
             <div class="flex justify-between items-baseline">
-              <button class="mt-4 bg-yellow-600 text-white py-2 px-6 rounded-lg">Login</button>
-              <button class="text-sm hover:underline">Forgot password?</button>
+              <button class="mt-3 bg-yellow-600 text-white py-2 px-5 rounded-lg">Login</button>
+              <button class="text-vs hover:underline">Forgot password?</button>
+              <button class="text-vs hover:underline">New user?</button>
             </div>
           </div>
         </div>
