@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Switch, Route } from 'react-router-dom';
 
 class forgotpass extends React.Component{
   constructor(props) {
@@ -33,10 +34,11 @@ class forgotpass extends React.Component{
               <label class="block font-semibold">Email</label>
               <input type="text" placeholder="Email" class=" border w-full h-3 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-1 focus:ring-yellow-600 rounded-md" />
 
-              {(this.state.isSubmitted)?
-                <Submitted />:
-                <SubmitButton onClick={() => this.handleClick()}/>
-              }
+            <Switch>
+                <Route path='/forgotpass' exact component={SubmitButton} />
+                <Route path='/forgotpass/submitted' exact component={Submitted} />
+            </Switch>
+              
               
             </div>
           </div>
@@ -50,12 +52,13 @@ class forgotpass extends React.Component{
 
 function SubmitButton(props){
   return(
+    <Link to='/forgotpass/submitted' className='p-2'>
       <button
         class="mt-4 bg-yellow-600 text-white py-2 px-6 rounded-lg"
-        onClick={() => props.onClick()}
       >
         Submit
       </button>
+    </Link>
   )
 }
 
