@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 
-class forgotpass extends React.Component{
+class ForgotPass extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +52,7 @@ class forgotpass extends React.Component{
 
 function SubmitButton(props){
   return(
-    <Link to='/forgotpass/submitted' className='p-2'>
+    <Link to='/forgotpass/submitted'>
       <button
         class="mt-4 bg-yellow-600 text-white py-2 px-6 rounded-lg"
       >
@@ -71,4 +71,4 @@ function Submitted(){
   )
 }
 
-export default forgotpass;
+export default ForgotPass;
