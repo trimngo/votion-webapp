@@ -8,7 +8,7 @@ import Menu from './pages/menu';
 import Footer from './components/Footer';
 import Dropdown from './components/Dropdown';
 import Create from './pages/create';
-import Forgotpass from './pages/ForgotPass';
+import ForgotPass from './pages/ForgotPass';
 import Login from './pages/Login';
 
 
@@ -24,7 +24,7 @@ function App() {
       <Switch>
         <Redirect from="/" to="/login" exact />
         <Route path='/login' exact component={Login} />
-        <Route path='/forgotpass' component={Forgotpass} />
+        <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/home' component={Home} />
         <Route component={NoMatch}/>
       </Switch>
