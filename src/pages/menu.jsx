@@ -30,7 +30,7 @@ import {
 } from '@heroicons/react/outline'
 import { ChevronLeftIcon, FilterIcon, MailIcon, PhoneIcon, SearchIcon } from '@heroicons/react/solid'
 
-import BasicCard from "./BasicCard";
+import BasicCard from "./basiccard";
 
 const tabs = [
 
