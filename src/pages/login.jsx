@@ -48,7 +48,9 @@ export default function Login(props) {
     .then(data => {
         localStorage.setItem("token", data.jwt)
         props.handleLogin(data.user)
+        return data;
     })
+    .then(data => console.log(data))
     setEmail("")
     setPassword("")
 }
@@ -81,8 +83,6 @@ export default function Login(props) {
                 <input
                   id="email"
                   name="email"
-                  type="email"
-                  autoComplete="email"
                   required
                   value={email}
                   onChange={handleEmailChange}
