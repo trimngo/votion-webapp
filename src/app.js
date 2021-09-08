@@ -19,11 +19,18 @@ function NoMatch(){
 }
 
 function App() {
+  const [user, setUser] = useState({})
+
+  const handleLogin = (user) => {
+    setUser(user)
+  }
+
   return (
     <Router>
       <Switch>
         <Redirect from="/" to="/login" exact />
-        <Route path='/login' exact component={Login} />
+        <Route path='/login' exact
+          render={(props) => <Login {...props} handleLogin={handleLogin} />} />
         <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/home' component={Home} />
         <Route component={NoMatch}/>
