@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React, {useState, useEffect} from 'react';
-
+import {url} from '../app';
 /*
   This example requires Tailwind CSS v2.0+ 
   
@@ -33,7 +33,7 @@ export default function Login(props) {
   }
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    fetch(`http://localhost:3000/authenticate`, {
+    fetch(url + 'authenticate', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

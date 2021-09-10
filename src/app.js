@@ -11,6 +11,9 @@ import Create from './pages/create';
 import ForgotPass from './pages/forgotpass';
 import Login from './pages/login';
 
+const url = (process.env.NODE_ENV === 'production')? 
+  'https://kraken-api.herokuapp.com/':'http://localhost:3000/' 
+
 
 function NoMatch(){
   return(
@@ -26,7 +29,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router>  {/* might need to remove this since there is already a router in index.js*/}
       <Switch>
         <Redirect from="/" to="/login" exact />
         <Route path='/login' exact
@@ -40,3 +43,4 @@ function App() {
 }
 
 export default App;
+export {url};
