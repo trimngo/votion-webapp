@@ -11,6 +11,7 @@ import Create from './pages/create';
 import ForgotPass from './pages/forgotpass';
 import Login from './pages/login';
 import UploadAvatar from './pages/uploadavatar';
+import DisplayAvatar from './pages/displayavatar';
 
 const url = (process.env.NODE_ENV === 'production')? 
   'https://kraken-api.herokuapp.com/':'http://localhost:3000/' 
@@ -38,6 +39,7 @@ function App() {
         <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/home' component={Home} />
         <Route path='/uploadavatar' component={UploadAvatar} />
+        <Route path='/displayavatar' component={DisplayAvatar} />
         <Route component={NoMatch}/>
       </Switch>
     </Router>
