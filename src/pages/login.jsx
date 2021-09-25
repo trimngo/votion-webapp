@@ -46,7 +46,7 @@ export default function Login(props) {
     })
     .then(resp => resp.json())
     .then(data => {
-        localStorage.setItem("token", data.jwt)
+        localStorage.setItem("token", data.auth_token)
         props.handleLogin(data.user)
         return data;
     })
