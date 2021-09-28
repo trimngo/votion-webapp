@@ -22,10 +22,13 @@ const getuserinfo = () => {
 
 function UploadAvatar(){
     const [userInfo, setUserInfo] = useState(null)
-    useEffect( async () => {
-        let temp = await getuserinfo()
-        console.log("blah2:",temp)
-        setUserInfo(temp)
+    useEffect( () => {
+        async function fetchData(){
+            let temp = await getuserinfo()
+            console.log("blah2:",temp)
+            setUserInfo(temp)
+        }
+        fetchData()
     }, [])
 
 
