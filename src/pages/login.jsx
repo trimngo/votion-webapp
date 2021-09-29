@@ -52,9 +52,10 @@ export default function Login(props) {
         return data;
     })
     .then(data => console.log(data))
+    .then( () => {if(props.location.state.from.pathname) props.history.push(props.location.state.from.pathname)})
     setEmail("")
     setPassword("")
-}
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
