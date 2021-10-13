@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 function Proposals(props) {
 
     //get proposals
-    const [userInfo, setUserInfo] = useState(null)
+    const [proposals, setProposals] = useState(null)
     useEffect( () => {
         const token = localStorage.getItem("token")
         return fetch(url + 'proposals' , {
@@ -23,7 +23,7 @@ function Proposals(props) {
     }, [])
 
     return(
-        <div>Hi!</div>
+        <div>{proposals}</div>
     )
 }
 
