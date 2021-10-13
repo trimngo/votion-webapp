@@ -3,25 +3,31 @@
 
 // If they are: they proceed to the page
 // If not: they are redirected to the login page.
-import React from 'react'
-
 import { Redirect, Route } from 'react-router-dom'
-
-function isLoggedInService(){
-    const token = localStorage.getItem("token")
-    if(token){
-        return true
-    }
-    else{
-        return false
-    }
-}
+import React, {useState, useEffect} from 'react';
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
+  useEffect( () => {
+    const token = localStorage.getItem("token")
 
-  // Add your own authentication on the below line.
-  const isLoggedIn = isLoggedInService()
+    if(token){
+      fetch(`http://localhost:3000/is_token_valid`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(resp => resp.json())
+      .then(data => {
+          console.log(data)
+          setIsLoggedIn(true)})
+    }
+    else{
+      setIsLoggedIn(false)
+    }
+
+  }, [])
 
   return (
     <Route
