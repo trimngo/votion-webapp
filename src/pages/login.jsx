@@ -52,9 +52,13 @@ export default function Login(props) {
         return data;
     })
     .then(data => console.log(data))
-    .then( () => {if(props.location.state.from.pathname) props.history.push(props.location.state.from.pathname)})
-    setEmail("")
-    setPassword("")
+    .then( () => {
+      if(props.location?.state?.from?.pathname !==undefined && props.location.state.from.pathname ) 
+        props.history.push(props.location.state.from.pathname)
+      else
+        props.history.push("/home")
+    })
+
   }
 
   return (

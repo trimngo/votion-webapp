@@ -2,9 +2,9 @@ import {url} from '../app';
 import React, {useState, useEffect} from 'react';
 
 function Proposals(props) {
-
+    let temp
     //get proposals
-    const [proposals, setProposals] = useState(null)
+    const [proposals, setProposals] = useState("")
     useEffect( () => {
         const token = localStorage.getItem("token")
         return fetch(url + 'proposals' , {
@@ -17,14 +17,12 @@ function Proposals(props) {
         })
         .then(resp => resp.json())
         .then(data => {
-            setProposals(data)
+            setProposals(JSON.stringify(data.proposals))
             console.log(data)
-            return JSON.stringify(data)
         })
     }, [])
-
     return(
-        <div>{proposals.proposals}</div>
+        <div>{proposals}</div>
     )
 }
 

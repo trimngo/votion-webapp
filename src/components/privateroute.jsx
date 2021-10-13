@@ -45,6 +45,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     }
 
   }, [])
+  
   if (!isTokenValidated) return <div />; // or some kind of loading animation
 
   return (<Route {...rest}
