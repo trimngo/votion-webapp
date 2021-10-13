@@ -17,13 +17,14 @@ function Proposals(props) {
         })
         .then(resp => resp.json())
         .then(data => {
+            setProposals(data)
             console.log(data)
             return JSON.stringify(data)
         })
     }, [])
 
     return(
-        <div>{proposals}</div>
+        <div>{proposals.proposals}</div>
     )
 }
 
