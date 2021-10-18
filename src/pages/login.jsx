@@ -46,14 +46,20 @@ export default function Login(props) {
     })
     .then(resp => resp.json())
     .then(data => {
-        localStorage.setItem("token", data.jwt)
+        localStorage.setItem("token", data.auth_token)
+        localStorage.setItem("id", data.id)
         props.handleLogin(data.user)
         return data;
     })
     .then(data => console.log(data))
-    setEmail("")
-    setPassword("")
-}
+    .then( () => {
+      if(props.location?.state?.from?.pathname !==undefined && props.location.state.from.pathname ) 
+        props.history.push(props.location.state.from.pathname)
+      else
+        props.history.push("/home")
+    })
+
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

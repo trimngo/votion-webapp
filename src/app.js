@@ -13,6 +13,8 @@ import ForgotPass from './pages/forgotpass';
 import Login from './pages/login';
 import UploadAvatar from './pages/uploadavatar';
 import DisplayAvatar from './pages/displayavatar';
+import Proposals from './pages/proposals';
+import PrivateRoute from './components/privateroute';
 
 const url = (process.env.NODE_ENV === 'production')? 
   'https://kraken-api.herokuapp.com/':'http://localhost:3000/' 
@@ -27,6 +29,7 @@ function NoMatch(){
 function App() {
   const [user, setUser] = useState({})
 
+  // not sure if user is used anywhere
   const handleLogin = (user) => {
     setUser(user)
   }
@@ -40,8 +43,10 @@ function App() {
         <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/home' component={Home} />
         <Route path='/voting' component={Voting} />
-        <Route path='/uploadavatar' component={UploadAvatar} />
+        {/* <Route path='/uploadavatar' component={UploadAvatar} /> */}
         <Route path='/displayavatar' component={DisplayAvatar} />
+        <PrivateRoute path="/uploadavatar" component={UploadAvatar} />
+        <PrivateRoute path="/proposals" component={Proposals} />
         <Route component={NoMatch}/>
       </Switch>
     </Router>
