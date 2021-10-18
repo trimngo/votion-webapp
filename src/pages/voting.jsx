@@ -1,13 +1,15 @@
+import {url} from '../app';
+import React, {useState, useEffect} from 'react';
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import React, { Component, PropTypes } from 'react';
+import { Component, PropTypes } from 'react';
 import styles from './voting.css'
 import ApexCharts from 'apexcharts'
 import { AiOutlineCheck, AiOutlineClose, AiFillHome, AiFillHeart, AiFillPlusCircle, AiOutlineSearch } from 'react-icons/ai';
 import { BsCircle } from 'react-icons/bs';
 import { PieChart } from 'react-minimal-pie-chart';
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { HiUserGroup } from 'react-icons/hi'
 import axios from "axios";
 
@@ -149,7 +151,29 @@ function voteMethod(item)
     return <label style={{float: 'right'}}> <BsCircle /></label>
 }
 
+
+
 function Voting() {
+
+  const [proposals, setProposals] = useState([])
+  useEffect( () => {
+    const token = localStorage.getItem("token")
+    return fetch(url + 'proposals/2' , {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        setProposals(data.proposals)
+        console.log(data)
+    })
+  }, [])
+
+
   return (
     <div className={styles.backgound}>
       <Disclosure as="nav" className="bg-white shadow-sm">
@@ -302,7 +326,7 @@ function Voting() {
 
         <header>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{paddingTop: '20px'}}>
-            <h1 className="text-3xl font-bold leading-tight text-gray-900 bg-white shadow-sm">Idea 1</h1>
+            <h1 className="text-3xl font-bold leading-tight text-gray-900 bg-white shadow-sm">{proposals.title}</h1>
           </div>
         </header>
         <main>

@@ -42,7 +42,7 @@ function App() {
           render={(props) => <Login {...props} handleLogin={handleLogin} />} />
         <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/home' component={Home} />
-        <Route path='/voting' component={Voting} />
+        <PrivateRoute path='/voting' component={Voting} />
         {/* <Route path='/uploadavatar' component={UploadAvatar} /> */}
         <Route path='/displayavatar' component={DisplayAvatar} />
         <PrivateRoute path="/uploadavatar" component={UploadAvatar} />
