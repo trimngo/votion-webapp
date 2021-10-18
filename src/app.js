@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/navbar';
 import { Switch, Route, BrowserRouter as Router, Redirect} from 'react-router-dom';
 import Home from './pages/home';
+import Voting from './pages/voting';
 import About from './pages/about';
 import Delegation from './pages/delegation';
 import Menu from './pages/menu';
@@ -38,6 +39,7 @@ function App() {
           render={(props) => <Login {...props} handleLogin={handleLogin} />} />
         <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/home' component={Home} />
+        <Route path='/voting' component={Voting} />
         <Route path='/uploadavatar' component={UploadAvatar} />
         <Route path='/displayavatar' component={DisplayAvatar} />
         <Route component={NoMatch}/>

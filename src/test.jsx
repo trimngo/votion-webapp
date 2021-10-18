@@ -17,6 +17,9 @@ export default function Testroute() {
             <Link to="/">Home</Link>
           </li>
           <li>
+            <Link to="/voting">Voting</Link>
+          </li>
+          <li>
             <Link to="/about">About</Link>
           </li>
           <li>
@@ -46,6 +49,10 @@ function Home() {
 
 function About() {
   return <h2>About</h2>;
+}
+
+function Voting() {
+  return <h2>Voting</h2>;
 }
 
 function Topics() {
