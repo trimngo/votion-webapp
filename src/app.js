@@ -11,7 +11,7 @@ import dropdown from './components/dropdown';
 import Create from './pages/create';
 import ForgotPass from './pages/forgotpass';
 import Login from './pages/login';
-import UploadAvatar from './pages/uploadavatar';
+import Profile from './pages/profile';
 import DisplayAvatar from './pages/displayavatar';
 import Proposals from './pages/proposals';
 import PrivateRoute from './components/privateroute';
@@ -43,9 +43,8 @@ function App() {
         <Route path='/forgotpass' component={ForgotPass} />
         <Route path='/home' component={Home} />
         <Route path='/voting' component={Voting} />
-        {/* <Route path='/uploadavatar' component={UploadAvatar} /> */}
         <Route path='/displayavatar' component={DisplayAvatar} />
-        <PrivateRoute path="/uploadavatar" component={UploadAvatar} />
+        <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/proposals" component={Proposals} />
         <Route component={NoMatch}/>
       </Switch>

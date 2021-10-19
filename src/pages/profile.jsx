@@ -20,7 +20,7 @@ const getuserinfo = () => {
     
 }   
 
-function UploadAvatar(){
+function Profile(){
     const [userInfo, setUserInfo] = useState(null)
     useEffect( () => {
         async function fetchData(){
@@ -66,5 +66,5 @@ function UploadAvatar(){
     )
 }
 
-export default UploadAvatar;
+export default Profile;
 
