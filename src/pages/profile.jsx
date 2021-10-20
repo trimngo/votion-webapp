@@ -1,34 +1,24 @@
 import {url} from '../app';
 import React, {useState, useEffect} from 'react';
 
-const getuserinfo = () => {
-    const id = localStorage.getItem("id")
-    
-    return fetch(url + 'users/' + id , {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
-    })
-    .then(resp => resp.json())
-    .then(data => {
-        console.log(data)
-        return JSON.stringify(data)
-    })
-
-    
-}   
 
 function Profile(){
-    const [userInfo, setUserInfo] = useState(null)
+    const [userInfo, setUserInfo] = useState({})
     useEffect( () => {
-        async function fetchData(){
-            let temp = await getuserinfo()
-            console.log("blah2:",temp)
-            setUserInfo(temp)
-        }
-        fetchData()
+        const id = localStorage.getItem("id")
+    
+        return fetch(url + 'users/' + id , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+            setUserInfo(data)
+        })
     }, [])
 
 
@@ -37,10 +27,11 @@ function Profile(){
 
     var headers;
     var query_params;
-
     return(
         <div>
-        duh {userInfo}
+            <img src={userInfo?.user?.icon_url}
+                alt={userInfo?.user?.icon_url} width="193" height="130" />
+            <pre>{JSON.stringify(userInfo, null, 2)} </pre>
             
         <ReactS3Uploader
             signingUrl="/s3/sign"
