@@ -43,8 +43,8 @@ function Profile(){
             // onProgress={this.onUploadProgress}
             // onError={this.onUploadError}
             // onFinish={this.onUploadFinish}
-            signingUrlHeaders={{ additional: headers }}
-            signingUrlQueryParams={{ additional: query_params }}
+            // signingUrlHeaders={{ additional: headers }}
+            // signingUrlQueryParams={{ additional: query_params }}
             signingUrlWithCredentials={ false }      // in case when need to pass authentication credentials via CORS
             uploadRequestHeaders={{ 'x-amz-acl': 'public-read' }}  // this is the default
             contentDisposition="auto"

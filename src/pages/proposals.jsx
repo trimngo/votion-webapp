@@ -36,8 +36,54 @@ function Proposals(props) {
             console.log(data)
         })
     }, [])
+
+    const [singleProposal, setSingleProposal] = useState([])
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        return fetch(url + 'proposals/262' , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            setSingleProposal(data.proposal)
+            console.log(data)
+        })
+    }, [])
+
+    const [votes, setVotes] = useState([])
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        return fetch(url + 'proposals/262/votes' , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            setVotes(data.votes)
+            console.log(data)
+        })
+    }, [])
+
     return(
+        
         <div>
+            <h1>One Proposal</h1>
+            <pre>{JSON.stringify(singleProposal, null, 2)}</pre>
+            <hr></hr>
+            <h1>Votes</h1>
+            <pre>{JSON.stringify(votes, null, 2)}</pre>
+            <hr></hr>
+
+            <h1>All Proposals</h1>
             <RenderProposals p={proposals} />
         </div>
     )
