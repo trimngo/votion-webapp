@@ -73,6 +73,21 @@ function Proposals(props) {
         })
     }, [])
 
+    const handleSubmit = (votetype) => {
+        const token = localStorage.getItem("token")
+        fetch(url + 'proposals/262/votes', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({"vote": {"value":votetype}})
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+      }
+
     return(
         
         <div>
@@ -82,6 +97,20 @@ function Proposals(props) {
             <h1>Votes</h1>
             <pre>{JSON.stringify(votes, null, 2)}</pre>
             <hr></hr>
+
+            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => handleSubmit("Yes")}>
+                Yes
+            </button>
+            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => handleSubmit("Abstain")}>
+                Abstain
+            </button>
+            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => handleSubmit("No")}>
+                No
+            </button>
+
 
             <h1>All Proposals</h1>
             <RenderProposals p={proposals} />
