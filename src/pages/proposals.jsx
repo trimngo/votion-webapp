@@ -84,9 +84,26 @@ function Proposals(props) {
             },
             body: JSON.stringify({"vote": {"value":votetype}})
         })
-        .then(resp => resp.json())
-        .then(data => console.log(data))
-      }
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     console.log(data)
+            
+        //     return fetch(url + 'proposals/262' , {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             "Accept": "application/json",
+        //             Authorization: `Bearer ${token}`
+        //         }
+        //     })
+
+        // })
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     setSingleProposal(data.proposal)
+        //     console.log(data)
+        // })
+    }
 
     return(
         
@@ -98,15 +115,15 @@ function Proposals(props) {
             <pre>{JSON.stringify(votes, null, 2)}</pre>
             <hr></hr>
 
-            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={() => handleSubmit("Yes")}>
                 Yes
             </button>
-            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={() => handleSubmit("Abstain")}>
                 Abstain
             </button>
-            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={() => handleSubmit("No")}>
                 No
             </button>
