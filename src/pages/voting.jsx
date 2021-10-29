@@ -28,11 +28,11 @@ const user = {
 }
 const navigation = [
 
-  { name: <AiFillHome />, href: '#', current: true },
-  { name: <AiFillHeart />, href: '#', current: false },
-  { name: <AiFillPlusCircle />, href: '#', current: false },
-  { name: <HiUserGroup />, href: '#', current: false },
-  { name: <AiOutlineSearch />, href: '#', current: false}
+  { name: <AiFillHome size={30}/>, href: '#', current: true },
+  { name: <AiFillHeart size={30}/>, href: '#', current: false },
+  { name: <AiFillPlusCircle size={30} />, href: '#', current: false },
+  { name: <HiUserGroup size={30} />, href: '#', current: false },
+  { name: <AiOutlineSearch size={30} />, href: '#', current: false}
 
 ]
 const userNavigation = [
@@ -49,87 +49,6 @@ const Votes = [
   { name: 'Rachel', current: 'abstain'}
 ]
 
-// useEffect(() => {
-//   api
-//     .get("/users/1")
-//     .then((response) => setUser(response.data))
-//     .catch((err) => {
-//       console.error("ops! ocorreu um erro" + err);
-//     });
-// }, []);
-
-// const gitHubUrl = "https://api.github.com/users/deekshasharma";
-
-// const getGiHubUserWithAxios = async () => {
-//   const response = await axios.get(gitHubUrl);
-//   setUserData(response.data);
-// };
-
-// function App() {
-//   const [userData, setUserData] = useState({});
-
-//   useEffect(() => {
-//     getGitHubUserWithFetch();
-//   }, []);
-
-//   const getGitHubUserWithFetch = async () => {
-//     const response = await fetch(gitHubUrl);
-//     const jsonData = await response.json();
-//     setUserData(jsonData);
-//   };
-
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <h2>GitHub User Data</h2>
-//       </header>
-//       <div className="user-container">
-//         <h5 className="info-item">{userData.name}</h5>
-//         <h5 className="info-item">{userData.location}</h5>
-//         <h5 className="info-item">{userData.blog}</h5>
-//         <h5 className="info-item">{userData.company}</h5>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default class PersonList extends React.Component {
-//   state = {
-//     persons: []
-//   }
-
-//   componentDidMount() {
-//     axios.get(`http://localhost:3000/proposals`)
-//       .then(res => {
-//         const persons = res.data;
-//         this.setState({ persons });
-//       })
-//   }
-
-//   render() {
-//     return (
-//       <ul>
-//         { this.state.persons.map(person => <li>{person.id}</li>)}
-//       </ul>
-//     )
-//   }
-// }
-
-// const token = {}
-
-// const config = {
-//   headers: { Authorization: `Bearer ${token}` }
-// };
-
-// const bodyParameters = {
-//  key: "value"
-// };
-
-// axios.post( 
-// 'http://localhost:3000/voting',
-// bodyParameters,
-// config
-// ).then(console.log).catch(console.log)
 
 const remaining = {
   position: 'center',
@@ -142,13 +61,74 @@ function classNames(...classes) {
 
 function voteMethod(item) 
 {   
-  <label>{item.current }</label>        
-  if(item.current === 'approve')
+  <label>{item }</label>        
+  if(item === 'yes')
     return <label style={{float: 'right', color: '#219653'}}> <AiOutlineCheck /></label>
-  else if(item.current === 'oppose')
+  else if(item.current === 'no')
     return <label style={{float: 'right', color: '#FA7E0C'}}> <AiOutlineClose /></label>
   else
     return <label style={{float: 'right'}}> <BsCircle /></label>
+}
+
+function RenderUsers(users_id) {
+
+  const user_id = users_id.p;
+
+  console.log(user_id)
+
+  const [userInfo, setUserInfo] = useState({})
+  useEffect( () => {
+      const id = localStorage.getItem("id")
+  
+      return fetch(url + 'users/' + user_id , {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          }
+      })
+      .then(resp => resp.json())
+      .then(data => {
+          console.log(data)
+          setUserInfo(data)
+      })
+  }, [])
+
+  return (
+      <div>        
+       <pre>{JSON.stringify(userInfo?.user?.name, null, 2)} </pre>
+      </div>
+  );
+}
+
+function RenderUsersImg(users_id) {
+
+  const user_id = users_id.p;
+
+  console.log(user_id)
+
+  const [userInfo, setUserInfo] = useState({})
+  useEffect( () => {
+      const id = localStorage.getItem("id")
+  
+      return fetch(url + 'users/' + user_id , {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          }
+      })
+      .then(resp => resp.json())
+      .then(data => {
+          console.log(data)
+          setUserInfo(data)
+      })
+  }, [])
+
+  return (
+       <img src={userInfo}
+                alt={userInfo} />
+  );
 }
 
 
@@ -158,7 +138,7 @@ function Voting() {
   const [proposals, setProposals] = useState([])
   useEffect( () => {
     const token = localStorage.getItem("token")
-    return fetch(url + 'proposals/2' , {
+    return fetch(url + 'proposals/9' , {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -173,8 +153,47 @@ function Voting() {
     })
   }, [])
 
+  const [singleProposal, setSingleProposal] = useState([])
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        return fetch(url + 'proposals/2' , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            setSingleProposal(data.proposal)
+            console.log(data)
+        })
+    }, [])
+
+    const [votes, setVotes] = useState([])
+    useEffect( () => {
+        const token = localStorage.getItem("token")
+        return fetch(url + 'proposals/2/votes' , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            setVotes(data.votes)
+            console.log(data)
+        })
+    }, [])
+
+
 
   return (
+
+      
     <div className={styles.backgound}>
       <Disclosure as="nav" className="bg-white shadow-sm">
         {({ open }) => (
@@ -326,16 +345,16 @@ function Voting() {
 
         <header>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{paddingTop: '20px'}}>
-            <h1 className="text-3xl font-bold leading-tight text-gray-900 bg-white shadow-sm">{proposals.title}</h1>
+            <h1 className="text-3xl font-bold leading-tight text-gray-900 bg-white shadow-sm">{singleProposal.title}</h1>
           </div>
         </header>
         <main>
           <div style={{padding: '20px', paddingLeft: '30px'}}>
-            <label style={{color: '#4B5563'}}>Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Nam condimentum tempus diam, ultricies sollicitudin erat facilisis eget. Vestibulum rhoncus dui vel eros laoreet consectetur. Vivamus eget elementum ligula, vitae pharetra quam. Nullam at ligula sed metu. Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Nam condimentum tempus diam, ultricies sollicitudin erat facilisis eget. Vestibulum rhoncus dui vel eros laoreet consectetur. Vivamus eget elementum ligula, vitae pharetra quam. Nullam at ligula sed metu </label>
+            <label style={{color: '#4B5563'}}> {singleProposal.body} </label>
           </div>
           <div style={{paddingTop: '20'}}>
             <div>
-              <h2 style={remaining}> Remaining days </h2>
+              <h2 style={remaining}> {singleProposal.voting_deadline} </h2>
             </div>
             <div style={{alignContent: 'center', paddingTop: '20px',  display: 'block', width: '100%', height: '300px'}}>
               <PieChart
@@ -361,7 +380,7 @@ function Voting() {
               <h3 className="text-2xl font-bold leading-tight text-gray-900 bg-white shadow-sm" style={{paddingTop: '20px', paddingLeft:'30px'}}>Votes</h3>
             </div>
             <div>
-            {Votes.map((item) => (
+            {votes.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
@@ -374,9 +393,9 @@ function Voting() {
                     aria-current={item.current ? 'page' : undefined}
                   >
                     <div className='wrapper_2'>
-                      <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
-                      <div style={{color: '#4B5563'}}> {item.name} {user.email} </div>
-                      <div > {voteMethod(item)} </div>
+                      <div> <RenderUsersImg p={item.voter_id} /> </div>
+                      <div style={{color: '#4B5563'}}> <RenderUsers p={item.voter_id} />  </div>
+                      <div > {voteMethod(item.value)} </div>
                     </div>
                   </a>
             ))}
