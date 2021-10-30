@@ -131,7 +131,31 @@ function RenderUsersImg(users_id) {
   );
 }
 
+function ChangeDate(data) {
 
+  const FormatDate = () => {
+    let dateTimeString =
+      data.getDate() +
+      '/' +
+      (data.getMonth() + 1) +
+      '/' +
+      data.getFullYear() +
+      ' ';
+
+    let hours = data.getHours();
+    let minutes = data.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    dateTimeString = dateTimeString + hours + ':' + minutes + ' ' + ampm;
+
+    return (
+      <label> dateTimeString </label>
+      ); // 4/5/2021 4:34 pm
+  };
+
+}
 
 function Voting() {
 
@@ -152,6 +176,39 @@ function Voting() {
         console.log(data)
     })
   }, [])
+
+  const handleSubmit = (votetype) => {
+    const token = localStorage.getItem("token")
+    fetch(url + 'proposals/9/votes', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({"vote": {"value":votetype}})
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data)
+        
+        fetch(url + 'proposals/9/votes' , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            setVotes(data.votes)
+            console.log(data)
+        })
+
+    })
+
+}
 
   const [singleProposal, setSingleProposal] = useState([])
     useEffect( () => {
@@ -187,9 +244,24 @@ function Voting() {
             setVotes(data.votes)
             console.log(data)
         })
-    }, [])
+     }, [])
 
-
+    const fullDate = singleProposal.voting_deadline
+    const testDate = String(fullDate)
+    const [newDate, time] = testDate.split('T')
+    const [year, month, date] = newDate.split('-')
+    const t = String(time)
+    const [hour, minute, second] = t.split(':')
+    const seg = String(second)
+    const [sec, mili] =  seg.split('.')
+    var dateTime = new Date(parseInt(year), parseInt(month), parseInt(date), parseInt(hour), parseInt(minute), parseInt(sec))
+    var finalDate =  new Date();
+    var difference= Math.abs(dateTime - finalDate)
+    var days = parseInt(difference/(1000 * 3600 * 24))
+    var segs = difference / 1000;
+    var hours = parseInt((difference/(1000 * 3600 * 24) - days)*24)
+    var minutes = parseInt((((difference/(1000 * 3600 * 24) - days)*24) - hours)*60);
+   
 
   return (
 
@@ -354,7 +426,8 @@ function Voting() {
           </div>
           <div style={{paddingTop: '20'}}>
             <div>
-              <h2 style={remaining}> {singleProposal.voting_deadline} </h2>
+    
+              <h2 style={remaining}> {days} days, {hours} hours and {minutes} minutes Remaining </h2>
             </div>
             <div style={{alignContent: 'center', paddingTop: '20px',  display: 'block', width: '100%', height: '300px'}}>
               <PieChart
@@ -372,9 +445,9 @@ function Voting() {
               />
             </div>
             <div className="wrapper" style={{paddingTop: '30px', textAlign: 'center'}}>
-                <div><button style={{backgroundColor: '#219653', width: '150px', borderRadius: '25px'}}>Approve</button></div>
-                <div><button style={{backgroundColor: '#DDDDDD', width: '150px', borderRadius: '25px'}}> Abstain</button></div>
-                <div><button style={{backgroundColor: '#FA7E0C', width: '150px', borderRadius: '25px'}}>Oppose</button></div>
+                <div><button style={{backgroundColor: '#219653', width: '120px', borderRadius: '25px'}} onClick={() => handleSubmit("Yes")}>Approve</button></div>
+                <div><button style={{backgroundColor: '#DDDDDD', width: '120px', borderRadius: '25px'}} onClick={() => handleSubmit("Abstain")}> Abstain</button></div>
+                <div><button style={{backgroundColor: '#FA7E0C', width: '120px', borderRadius: '25px'}} onClick={() => handleSubmit("No")}>Oppose</button></div>
             </div>
             <div>
               <h3 className="text-2xl font-bold leading-tight text-gray-900 bg-white shadow-sm" style={{paddingTop: '20px', paddingLeft:'30px'}}>Votes</h3>
