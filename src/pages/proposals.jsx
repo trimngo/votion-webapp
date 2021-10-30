@@ -40,7 +40,7 @@ function Proposals(props) {
     const [singleProposal, setSingleProposal] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/2' , {
+        return fetch(url + 'proposals/262' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function Proposals(props) {
     const [votes, setVotes] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/2/votes' , {
+        return fetch(url + 'proposals/262/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -84,25 +84,26 @@ function Proposals(props) {
             },
             body: JSON.stringify({"vote": {"value":votetype}})
         })
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     console.log(data)
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
             
-        //     return fetch(url + 'proposals/262' , {
-        //         method: "GET",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             "Accept": "application/json",
-        //             Authorization: `Bearer ${token}`
-        //         }
-        //     })
+            fetch(url + 'proposals/262/votes' , {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                setVotes(data.votes)
+                console.log(data)
+            })
 
-        // })
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     setSingleProposal(data.proposal)
-        //     console.log(data)
-        // })
+        })
+
     }
 
     return(
