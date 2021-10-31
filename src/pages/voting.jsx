@@ -43,11 +43,11 @@ const userNavigation = [
 
 ]
 
-const Votes = [
-  { name: 'Luiza', current: 'approve'},
-  { name: 'Tri', current: 'oppose'},
-  { name: 'Rachel', current: 'abstain'}
-]
+// const Votes = [
+//   { name: 'Luiza', current: 'approve'},
+//   { name: 'Tri', current: 'oppose'},
+//   { name: 'Rachel', current: 'abstain'}
+// ]
 
 
 const remaining = {
@@ -59,12 +59,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+const proposalID = "262";
+
 function voteMethod(item) 
 {   
   <label>{item }</label>        
-  if(item === 'yes')
+  if(item.toLowerCase() === 'yes')
     return <label style={{float: 'right', color: '#219653'}}> <AiOutlineCheck /></label>
-  else if(item.current === 'no')
+  else if(item.toLowerCase() === 'no')
     return <label style={{float: 'right', color: '#FA7E0C'}}> <AiOutlineClose /></label>
   else
     return <label style={{float: 'right'}}> <BsCircle /></label>
@@ -159,61 +161,28 @@ function ChangeDate(data) {
 
 function Voting() {
 
-  const [proposals, setProposals] = useState([])
-  useEffect( () => {
-    const token = localStorage.getItem("token")
-    return fetch(url + 'proposals/9' , {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            Authorization: `Bearer ${token}`
-        }
-    })
-    .then(resp => resp.json())
-    .then(data => {
-        setProposals(data.proposals)
-        console.log(data)
-    })
-  }, [])
-
-  const handleSubmit = (votetype) => {
-    const token = localStorage.getItem("token")
-    fetch(url + 'proposals/9/votes', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({"vote": {"value":votetype}})
-    })
-    .then(resp => resp.json())
-    .then(data => {
-        console.log(data)
-        
-        fetch(url + 'proposals/9/votes' , {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            setVotes(data.votes)
-            console.log(data)
-        })
-
-    })
-
-}
+  // const [proposals, setProposals] = useState([])
+  // useEffect( () => {
+  //   const token = localStorage.getItem("token")
+  //   return fetch(url + 'proposals/' +proposalID , {
+  //       method: "GET",
+  //       headers: {
+  //           "Content-Type": "application/json",
+  //           "Accept": "application/json",
+  //           Authorization: `Bearer ${token}`
+  //       }
+  //   })
+  //   .then(resp => resp.json())
+  //   .then(data => {
+  //       setProposals(data.proposals)
+  //       console.log(data)
+  //   })
+  // }, [])
 
   const [singleProposal, setSingleProposal] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/2' , {
+        return fetch(url + 'proposals/' + proposalID , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -231,7 +200,7 @@ function Voting() {
     const [votes, setVotes] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/2/votes' , {
+        return fetch(url + 'proposals/' +proposalID +'/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -246,7 +215,42 @@ function Voting() {
         })
      }, [])
 
-    const fullDate = singleProposal.voting_deadline
+  const handleSubmit = (votetype) => {
+    const token = localStorage.getItem("token")
+    fetch(url + 'proposals/' +proposalID +'/votes', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({"vote": {"value":votetype}})
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data)
+        
+        fetch(url + 'proposals/'+ proposalID +'/votes' , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            setVotes(data.votes)
+            console.log(data)
+        })
+
+    })
+
+}
+
+  
+
+    const fullDate = singleProposal?.voting_deadline
     const testDate = String(fullDate)
     const [newDate, time] = testDate.split('T')
     const [year, month, date] = newDate.split('-')
@@ -417,12 +421,12 @@ function Voting() {
 
         <header>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{paddingTop: '20px'}}>
-            <h1 className="text-3xl font-bold leading-tight text-gray-900 bg-white shadow-sm">{singleProposal.title}</h1>
+            <h1 className="text-3xl font-bold leading-tight text-gray-900 bg-white shadow-sm">{singleProposal?.title}</h1>
           </div>
         </header>
         <main>
           <div style={{padding: '20px', paddingLeft: '30px'}}>
-            <label style={{color: '#4B5563'}}> {singleProposal.body} </label>
+            <label style={{color: '#4B5563'}}> {singleProposal?.body} </label>
           </div>
           <div style={{paddingTop: '20'}}>
             <div>
@@ -453,7 +457,7 @@ function Voting() {
               <h3 className="text-2xl font-bold leading-tight text-gray-900 bg-white shadow-sm" style={{paddingTop: '20px', paddingLeft:'30px'}}>Votes</h3>
             </div>
             <div>
-            {votes.map((item) => (
+            {votes?.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
