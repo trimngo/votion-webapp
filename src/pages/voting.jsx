@@ -62,9 +62,9 @@ function classNames(...classes) {
 function voteMethod(item) 
 {   
   <label>{item }</label>        
-  if(item === 'yes')
+  if((item === 'yes') || (item === 'Yes'))
     return <label style={{float: 'right', color: '#219653'}}> <AiOutlineCheck /></label>
-  else if(item.current === 'no')
+  else if(item === 'no' || item === 'No')
     return <label style={{float: 'right', color: '#FA7E0C'}}> <AiOutlineClose /></label>
   else
     return <label style={{float: 'right'}}> <BsCircle /></label>
@@ -231,7 +231,7 @@ function Voting() {
     const [votes, setVotes] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/2/votes' , {
+        return fetch(url + 'proposals/9/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -436,6 +436,7 @@ function Voting() {
               center={[50, 50]}
               lineWidth={20}
               rounded={50}
+              text={'23%'}
               // paddingAngle={15}
                 data={[
                   { title: 'One', value: 10, color: '#219653', radius: 50 },
@@ -468,7 +469,7 @@ function Voting() {
                     <div className='wrapper_2'>
                       <div> <RenderUsersImg p={item.voter_id} /> </div>
                       <div style={{color: '#4B5563'}}> <RenderUsers p={item.voter_id} />  </div>
-                      <div > {voteMethod(item.value)} </div>
+                      <div > {JSON.stringify(item} </div>
                     </div>
                   </a>
             ))}
