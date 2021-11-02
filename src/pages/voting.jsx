@@ -159,7 +159,7 @@ function ChangeDate(data) {
 
 }
 
-function Voting() {
+function Voting(props) {
 
   // const [proposals, setProposals] = useState([])
   // useEffect( () => {
@@ -266,6 +266,7 @@ function Voting() {
     var hours = parseInt((difference/(1000 * 3600 * 24) - days)*24)
     var minutes = parseInt((((difference/(1000 * 3600 * 24) - days)*24) - hours)*60);
    
+    debugger
 
   return (
 
