@@ -162,7 +162,7 @@ function Proposals(props) {
     const [singleProposal, setSingleProposal] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/262' , {
+        return fetch(url + 'proposals/2' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -180,7 +180,7 @@ function Proposals(props) {
     const [votes, setVotes] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/262/votes' , {
+        return fetch(url + 'proposals/2/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -197,7 +197,7 @@ function Proposals(props) {
 
     const handleSubmit = (votetype) => {
         const token = localStorage.getItem("token")
-        fetch(url + 'proposals/262/votes', {
+        fetch(url + 'proposals/2/votes', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -210,7 +210,7 @@ function Proposals(props) {
         .then(data => {
             console.log(data)
             
-            fetch(url + 'proposals/262/votes' , {
+            fetch(url + 'proposals/2/votes' , {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

@@ -5,13 +5,31 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Component, PropTypes } from 'react';
 import styles from './voting.css'
+import { IGif } from "@giphy/js-types";
+import { useAsync } from "react-async-hook";
 import ApexCharts from 'apexcharts'
 import { AiOutlineCheck, AiOutlineClose, AiFillHome, AiFillHeart, AiFillPlusCircle, AiOutlineSearch } from 'react-icons/ai';
 import { BsCircle } from 'react-icons/bs';
 import { PieChart } from 'react-minimal-pie-chart';
 // import { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { HiUserGroup } from 'react-icons/hi'
 import axios from "axios";
+import ReactDOM from 'react-dom'
+import { useParams } from "react-router-dom";
+import { Grid } from '@giphy/react-components'
+import { GiphyFetch } from '@giphy/js-fetch-api'
+import {
+  Carousel,
+  Gif,
+  Video,
+  VideoOverlay
+} from "@giphy/react-components";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 <head>
     <title>Voting</title>
@@ -59,14 +77,36 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const proposalID = "262";
+function Profile(){
+  const [userInfo, setUserInfo] = useState({})
+  useEffect( () => {
+      const id = localStorage.getItem("id")
+  
+      return fetch(url + 'users/' + id , {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          }
+      })
+      .then(resp => resp.json())
+      .then(data => {
+          console.log(data)
+          setUserInfo(data)
+      })
+  }, [])
 
+  return (
+    <img src={userInfo?.user?.icon_url} />
+
+  );
+}
 function voteMethod(item) 
 {   
   <label>{item }</label>        
-  if(item.toLowerCase() === 'yes')
+  if(item === 'yes' || item === 'Yes')
     return <label style={{float: 'right', color: '#219653'}}> <AiOutlineCheck /></label>
-  else if(item.toLowerCase() === 'no')
+  else if(item === 'no' || item === 'No')
     return <label style={{float: 'right', color: '#FA7E0C'}}> <AiOutlineClose /></label>
   else
     return <label style={{float: 'right'}}> <BsCircle /></label>
@@ -98,10 +138,11 @@ function RenderUsers(users_id) {
 
   return (
       <div>        
-       <pre>{JSON.stringify(userInfo?.user?.name, null, 2)} </pre>
+       <pre>{userInfo?.user?.name} </pre>
       </div>
   );
 }
+
 
 function RenderUsersImg(users_id) {
 
@@ -128,39 +169,80 @@ function RenderUsersImg(users_id) {
   }, [])
 
   return (
-       <img src={userInfo}
-                alt={userInfo} />
+    <div> {RenderGiphy(userInfo?.user?.icon_url)} </div>
+
   );
 }
 
-function ChangeDate(data) {
+// const that = this
 
-  const FormatDate = () => {
-    let dateTimeString =
-      data.getDate() +
-      '/' +
-      (data.getMonth() + 1) +
-      '/' +
-      data.getFullYear() +
-      ' ';
+// function constructor(props) {
+//   super(props)
+//   this.yourFunction = this.yourFunction.bind(this)
+//   return this
+// }
 
-    let hours = data.getHours();
-    let minutes = data.getMinutes();
-    let ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    dateTimeString = dateTimeString + hours + ':' + minutes + ' ' + ampm;
+const that = String(this)
+const handleThis = () => {
+  const that = this.props.match.params.id
+  return that
+}
 
-    return (
-      <label> dateTimeString </label>
-      ); // 4/5/2021 4:34 pm
-  };
+function RenderGiphy(api_key){
+  const gf = new GiphyFetch('CLlqFTkHnPOjFcKqDT5hZ8z46ANca7rI')
 
+// fetch 10 gifs at a time as the user scrolls (offset is handled by the grid)
+  const fetchGifs = (number) => gf.gif('cObIzBCAkFxW60ORYj')
+
+// React Component
+  ReactDOM.render(<Grid width={800} columns={3} gutter={6} fetchGifs={fetchGifs} />, document.getElementById('root'))
+function Voting(props) {
+
+}
+
+function GifDemo() {
+  const [gif, setGif] = useState<IGif | null>(null);
+  useAsync(async () => {
+    const { data } = await GiphyFetch.gif("fpXxIjftmkk9y");
+    setGif(data);
+  }, []);
+  return gif && <Gif gif={gif} width={200} />;
 }
 
 function Voting(props) {
 
+  // <script>
+  //   const apiKey = 'dc6zaTOxFJmzC'
+  //   fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}`)
+  //   .then(response => response.json())
+  //   .then(json => {
+  //     json.data
+  //       .map(gif => gif.images.fixed_height.url)
+  //       .forEach(url => {
+  //         let img = document.createElement('img')
+  //         img.src = url
+  //         document.body.appendChild(img)
+  //       })
+  //   })
+  //   .catch(error => document.body.appendChild = error)
+  // </script>
+
+  const params = useParams();
+
+  const id = props.match.params.id
+    
+  const [posts, setPosts] = useState([])
+  
+      useEffect(()=> {
+          axios.get(`http://localhost:5000/posts/${params.id}`)
+          .then(res => {
+              console.log(res)
+              setPosts(res.data)
+          })
+          .catch(err =>{
+              console.log(err)
+          })
+      }, [params.id])
   // const [proposals, setProposals] = useState([])
   // useEffect( () => {
   //   const token = localStorage.getItem("token")
@@ -179,10 +261,15 @@ function Voting(props) {
   //   })
   // }, [])
 
+  
+      
+  
   const [singleProposal, setSingleProposal] = useState([])
     useEffect( () => {
-        const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/' + proposalID , {
+      
+
+      const token = localStorage.getItem("token")
+        return fetch(url + 'proposals/' + id , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -199,8 +286,9 @@ function Voting(props) {
 
     const [votes, setVotes] = useState([])
     useEffect( () => {
-        const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/' +proposalID +'/votes' , {
+
+      const token = localStorage.getItem("token")
+        return fetch(url + 'proposals/' + id +'/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -215,9 +303,26 @@ function Voting(props) {
         })
      }, [])
 
+    const [proposalID, setUserInfo] = useState({})
+    useEffect( () => {
+    
+        return fetch(url + 'proposals/' + id , {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+            setUserInfo(data)
+        })
+    }, [])
+
   const handleSubmit = (votetype) => {
     const token = localStorage.getItem("token")
-    fetch(url + 'proposals/' +proposalID +'/votes', {
+    fetch(url + 'proposals/' + id +'/votes', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -229,8 +334,9 @@ function Voting(props) {
     .then(resp => resp.json())
     .then(data => {
         console.log(data)
-        
-        fetch(url + 'proposals/'+ proposalID +'/votes' , {
+      
+
+        fetch(url + 'proposals/'+ id +'/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -248,6 +354,7 @@ function Voting(props) {
 
 }
 
+  let { idd } = useParams();
   
 
     const fullDate = singleProposal?.voting_deadline
@@ -319,7 +426,7 @@ function Voting(props) {
                         <div>
                           <Menu.Button className="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                            <div className="h-8 w-8 rounded-full"> {Profile()} </div> 
                           </Menu.Button>
                         </div>
                         <Transition
@@ -441,13 +548,23 @@ function Voting(props) {
               center={[50, 50]}
               lineWidth={20}
               rounded={50}
-              // paddingAngle={15}
+              label={({ dataEntry }) => singleProposal?.vote_count}
+              labelStyle={{
+                fontSize: '25px',
+                fontFamily: 'sans-serif',
+                fill: '#E38627',
+              }}
+              labelPosition={0}
                 data={[
                   { title: 'One', value: 10, color: '#219653', radius: 50 },
                   { title: 'Two', value: 15, color: '#DDDDDD', radius: 50 },
                   { title: 'Three', value: 20, color: '#FA7E0C' , radius: 50},
                 ]}
-              />
+              >
+                <div className='chart-inner-text d-flex flex-column'>
+                  <p> {'23%'} </p>
+                </div>
+              </PieChart>
             </div>
             <div className="wrapper" style={{paddingTop: '30px', textAlign: 'center'}}>
                 <div><button style={{backgroundColor: '#219653', width: '120px', borderRadius: '25px'}} onClick={() => handleSubmit("Yes")}>Approve</button></div>
@@ -456,6 +573,7 @@ function Voting(props) {
             </div>
             <div>
               <h3 className="text-2xl font-bold leading-tight text-gray-900 bg-white shadow-sm" style={{paddingTop: '20px', paddingLeft:'30px'}}>Votes</h3>
+                      
             </div>
             <div>
             {votes?.map((item) => (
@@ -471,7 +589,8 @@ function Voting(props) {
                     aria-current={item.current ? 'page' : undefined}
                   >
                     <div className='wrapper_2'>
-                      <div> <RenderUsersImg p={item.voter_id} /> </div>
+                      <div> {GifDemo()} </div>
+                      {/* <div> <RenderUsersImg p={item.voter_id} /> </div> */}
                       <div style={{color: '#4B5563'}}> <RenderUsers p={item.voter_id} />  </div>
                       <div > {voteMethod(item.value)} </div>
                     </div>
