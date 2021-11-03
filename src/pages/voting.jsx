@@ -196,6 +196,7 @@ function RenderGiphy(api_key){
 
 // React Component
   ReactDOM.render(<Grid width={800} columns={3} gutter={6} fetchGifs={fetchGifs} />, document.getElementById('root'))
+function Voting(props) {
 
 }
 

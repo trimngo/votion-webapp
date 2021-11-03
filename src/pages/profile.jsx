@@ -22,7 +22,6 @@ function Profile(){
     }, [])
 
 
-
     var ReactS3Uploader = require('react-s3-uploader');
 
     var headers;
@@ -38,17 +37,57 @@ function Profile(){
             signingUrlMethod="GET"
             accept="image/*"
             s3path="/uploads/"
-            // preprocess={this.onUploadStart}
+            // preprocess={(file, next) => {}}
             // onSignedUrl={this.onSignedUrl}
             // onProgress={this.onUploadProgress}
             // onError={this.onUploadError}
-            // onFinish={this.onUploadFinish}
+            onFinish={(signResult) => {
+                //need upload to the server by modifying user info
+                const id = localStorage.getItem("id")
+                // user.name = params['user'].key?('name') ? params['user']['name'] : user.name
+                // user.icon_url = params['user'].key?('icon_url') ? params['user']['icon_url'] : user.icon_url
+                return fetch(url + 'users/' + id , {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(
+                        {"user": {"icon_url":
+                            "https://votionapi.s3.us-west-1.amazonaws.com/"+signResult.publicUrl}}
+                    )
+                })
+                .then(resp => resp.json())
+                .then(data => {
+                    console.log(data)
+                    setUserInfo(data)
+                })
+                .then( data => {
+                    return fetch(url + 'users/' + id , {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        }
+                    })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        setUserInfo(data)
+                    })
+                })
+            }}
             // signingUrlHeaders={{ additional: headers }}
             // signingUrlQueryParams={{ additional: query_params }}
             signingUrlWithCredentials={ false }      // in case when need to pass authentication credentials via CORS
             uploadRequestHeaders={{ 'x-amz-acl': 'public-read' }}  // this is the default
             contentDisposition="auto"
-            scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/ig, '')}
+            scrubFilename={(filename) => {
+                let newfn=filename.replace(/[^\w\d_\-.]+/ig, '')
+                // debugger
+                // console.log(newfn)
+                return newfn
+            }}
             server={url}
             // inputRef={cmp => this.uploadInput = cmp}
             autoUpload={true}
