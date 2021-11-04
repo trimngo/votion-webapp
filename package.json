@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.0.0",
+    "@giphy/js-fetch-api": "^4.1.2",
+    "@giphy/js-types": "^4.1.0",
     "@headlessui/react": "^1.4.0",
     "@heroicons/react": "^1.0.3",
     "@ionic-native/sqlite": "^4.20.0",
@@ -14,6 +16,7 @@
     "@testing-library/user-event": "^12.1.10",
     "apexcharts": "^3.28.3",
     "axios": "^0.23.0",
+    "channel": "^0.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.3.1",

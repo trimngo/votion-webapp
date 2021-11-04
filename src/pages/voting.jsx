@@ -5,8 +5,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Component, PropTypes } from 'react';
 import styles from './voting.css'
-import { IGif } from "@giphy/js-types";
-import { useAsync } from "react-async-hook";
+// import { IGif } from "@giphy/js-types";
+// import { useAsync } from "react-async-hook";
 import ApexCharts from 'apexcharts'
 import { AiOutlineCheck, AiOutlineClose, AiFillHome, AiFillHeart, AiFillPlusCircle, AiOutlineSearch } from 'react-icons/ai';
 import { BsCircle } from 'react-icons/bs';
@@ -17,14 +17,14 @@ import { HiUserGroup } from 'react-icons/hi'
 import axios from "axios";
 import ReactDOM from 'react-dom'
 import { useParams } from "react-router-dom";
-import { Grid } from '@giphy/react-components'
-import { GiphyFetch } from '@giphy/js-fetch-api'
-import {
-  Carousel,
-  Gif,
-  Video,
-  VideoOverlay
-} from "@giphy/react-components";
+// import { Grid } from '@giphy/react-components'
+// import { GiphyFetch } from '@giphy/js-fetch-api'
+// import {
+//   Carousel,
+//   Gif,
+//   Video,
+//   VideoOverlay
+// } from "@giphy/react-components";
 import {
   BrowserRouter as Router,
   Switch,
@@ -169,7 +169,9 @@ function RenderUsersImg(users_id) {
   }, [])
 
   return (
-    <div> {RenderGiphy(userInfo?.user?.icon_url)} </div>
+    <div> 
+      {/* {RenderGiphy(userInfo?.user?.icon_url)}  */}
+    </div>
 
   );
 }
@@ -189,24 +191,22 @@ const handleThis = () => {
 }
 
 function RenderGiphy(api_key){
-  const gf = new GiphyFetch('CLlqFTkHnPOjFcKqDT5hZ8z46ANca7rI')
+  // const gf = new GiphyFetch('CLlqFTkHnPOjFcKqDT5hZ8z46ANca7rI')
 
 // fetch 10 gifs at a time as the user scrolls (offset is handled by the grid)
-  const fetchGifs = (number) => gf.gif('cObIzBCAkFxW60ORYj')
+  // const fetchGifs = (number) => gf.gif('cObIzBCAkFxW60ORYj')
 
 // React Component
-  ReactDOM.render(<Grid width={800} columns={3} gutter={6} fetchGifs={fetchGifs} />, document.getElementById('root'))
-function Voting(props) {
-
+  // ReactDOM.render(<Grid width={800} columns={3} gutter={6} fetchGifs={fetchGifs} />, document.getElementById('root'))
 }
 
 function GifDemo() {
-  const [gif, setGif] = useState<IGif | null>(null);
-  useAsync(async () => {
-    const { data } = await GiphyFetch.gif("fpXxIjftmkk9y");
-    setGif(data);
-  }, []);
-  return gif && <Gif gif={gif} width={200} />;
+  // const [gif, setGif] = useState<IGif | null>(null);
+  // useAsync(async () => {
+  //   const { data } = await GiphyFetch.gif("fpXxIjftmkk9y");
+  //   setGif(data);
+  // }, []);
+  // return gif && <Gif gif={gif} width={200} />;
 }
 
 function Voting(props) {
@@ -351,8 +351,7 @@ function Voting(props) {
         })
 
     })
-
-}
+  }
 
   let { idd } = useParams();
   
@@ -603,7 +602,4 @@ function Voting(props) {
   )
 }
 
-
-
 export default Voting;
-
