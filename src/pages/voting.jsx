@@ -398,12 +398,10 @@ function Voting(props) {
     var hours = parseInt((difference/(1000 * 3600 * 24) - days)*24)
     var minutes = parseInt((((difference/(1000 * 3600 * 24) - days)*24) - hours)*60);
    
-    debugger
-
   return (
 
       
-    <div className={styles.backgound} style={{width: '1300px', float: 'center'}}>
+    <div className={styles.background} >
       <Disclosure as="nav" className="bg-white shadow-sm">
         {({ open }) => (
           <>
@@ -558,10 +556,10 @@ function Voting(props) {
           </div>
         </header>
         <main>
-          <div style={{padding: '20px', paddingLeft: '30px'}}>
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{padding: '20px', paddingLeft: '30px'}}>
             <label style={{color: '#4B5563'}}> {singleProposal?.body} </label>
           </div>
-          <div style={{paddingTop: '20'}}>
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{paddingTop: '20'}}>
             <div>
     
               <h2 style={remaining}> {days} days, {hours} hours and {minutes} minutes Remaining </h2>
@@ -582,8 +580,8 @@ function Voting(props) {
               labelPosition={0}
                 data={[
                   { title: 'One', value: countYes(votes), color: '#219653', radius: 50 },
-                  { title: 'Two', value: countNo(votes), color: '#DDDDDD', radius: 50 },
-                  { title: 'Three', value: countAbstain(votes), color: '#FA7E0C' , radius: 50},
+                  { title: 'Two', value: countNo(votes), color: '#FA7E0C', radius: 50 },
+                  { title: 'Three', value: countAbstain(votes), color: '#DDDDDD' , radius: 50},
                 ]}
               >
                 <div className='chart-inner-text d-flex flex-column'>
