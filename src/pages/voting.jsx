@@ -190,6 +190,33 @@ const handleThis = () => {
   return that
 }
 
+function countYes(votes){
+  var a = JSON.stringify(votes)
+
+  const ocorrencias = (a.match(/yes/g) || []).length;
+  const ocorrencias2 = (a.match(/Yes/g) || []).length;
+  const total = parseInt(ocorrencias) + parseInt(ocorrencias2)
+  return total
+}
+
+function countNo(votes){
+  var a = JSON.stringify(votes)
+
+  const ocorrencias = (a.match(/no/g) || []).length;
+  const ocorrencias2 = (a.match(/No/g) || []).length;
+  const total = parseInt(ocorrencias) + parseInt(ocorrencias2)
+  return total
+}
+
+function countAbstain(votes){
+  var a = JSON.stringify(votes)
+
+  const ocorrencias = (a.match(/abstain/g) || []).length;
+  const ocorrencias2 = (a.match(/Abstain/g) || []).length;
+  const total = parseInt(ocorrencias) + parseInt(ocorrencias2)
+  return total
+}
+
 function RenderGiphy(api_key){
   // const gf = new GiphyFetch('CLlqFTkHnPOjFcKqDT5hZ8z46ANca7rI')
 
@@ -353,7 +380,6 @@ function Voting(props) {
     })
   }
 
-  let { idd } = useParams();
   
 
     const fullDate = singleProposal?.voting_deadline
@@ -377,7 +403,7 @@ function Voting(props) {
   return (
 
       
-    <div className={styles.backgound}>
+    <div className={styles.backgound} style={{width: '1300px', float: 'center'}}>
       <Disclosure as="nav" className="bg-white shadow-sm">
         {({ open }) => (
           <>
@@ -555,9 +581,9 @@ function Voting(props) {
               }}
               labelPosition={0}
                 data={[
-                  { title: 'One', value: 10, color: '#219653', radius: 50 },
-                  { title: 'Two', value: 15, color: '#DDDDDD', radius: 50 },
-                  { title: 'Three', value: 20, color: '#FA7E0C' , radius: 50},
+                  { title: 'One', value: countYes(votes), color: '#219653', radius: 50 },
+                  { title: 'Two', value: countNo(votes), color: '#DDDDDD', radius: 50 },
+                  { title: 'Three', value: countAbstain(votes), color: '#FA7E0C' , radius: 50},
                 ]}
               >
                 <div className='chart-inner-text d-flex flex-column'>
@@ -571,7 +597,7 @@ function Voting(props) {
                 <div><button style={{backgroundColor: '#FA7E0C', width: '120px', borderRadius: '25px'}} onClick={() => handleSubmit("No")}>Oppose</button></div>
             </div>
             <div>
-              <h3 className="text-2xl font-bold leading-tight text-gray-900 bg-white shadow-sm" style={{paddingTop: '20px', paddingLeft:'30px'}}>Votes</h3>
+              <h3 className="text-2xl font-bold leading-tight text-gray-900 bg-white shadow-sm" style={{paddingTop: '20px', paddingLeft:'30px'}}> Votes </h3>
                       
             </div>
             <div>
