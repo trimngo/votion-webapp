@@ -1,25 +1,45 @@
-import {url} from '../app';
+import {url} from '../app'
 import React, {useState, useEffect} from 'react';
+import {
+    Gif,
+  } from "@giphy/react-components";
+  import { GiphyFetch } from "@giphy/js-fetch-api";
+import { useAsync } from "react-async-hook";
+import { IGif } from "@giphy/js-types";
+
+const apikey = "sXpGFDGZs0Dv1mmNFvYaGUvYwKX0PWIh"
+const giphyFetch = new GiphyFetch(apikey);
+
+
+function GifDemo() {
+    const [gif, setGif] = useState<IGif | null>(null);
+    useAsync(async () => {
+        const { data } = await giphyFetch.gif("fpXxIjftmkk9y");
+        setGif(data);
+    }, []);
+
+    return gif && <Gif gif={gif} width={200} />;
+}
 
 
 function Profile(){
-    const [userInfo, setUserInfo] = useState({})
-    useEffect( () => {
+    const [userInfo, setUserInfo] = useState({user:{icon_url:""}})
+    const getUserData = async () => {
         const id = localStorage.getItem("id")
     
-        return fetch(url + 'users/' + id , {
+        const resp = await fetch(url + 'users/' + id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             }
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-            setUserInfo(data)
-        })
-    }, [])
+        });
+        const data = await resp.json();
+        console.log(data);
+        setUserInfo(data);
+    }
+    
+    useEffect( () => {getUserData()} , [])
 
 
     var ReactS3Uploader = require('react-s3-uploader');
@@ -28,6 +48,7 @@ function Profile(){
     var query_params;
     return(
         <div>
+            <GifDemo />
             <img src={userInfo?.user?.icon_url}
                 alt={userInfo?.user?.icon_url} width="193" height="130" />
             <pre>{JSON.stringify(userInfo, null, 2)} </pre>
@@ -41,7 +62,7 @@ function Profile(){
             // onSignedUrl={this.onSignedUrl}
             // onProgress={this.onUploadProgress}
             // onError={this.onUploadError}
-            onFinish={(signResult) => {
+            onFinish={(signResult: { publicUrl: string; }) => {
                 //need upload to the server by modifying user info
                 const id = localStorage.getItem("id")
                 // user.name = params['user'].key?('name') ? params['user']['name'] : user.name
@@ -82,7 +103,7 @@ function Profile(){
             signingUrlWithCredentials={ false }      // in case when need to pass authentication credentials via CORS
             uploadRequestHeaders={{ 'x-amz-acl': 'public-read' }}  // this is the default
             contentDisposition="auto"
-            scrubFilename={(filename) => {
+            scrubFilename={(filename: string) => {
                 let newfn=filename.replace(/[^\w\d_\-.]+/ig, '')
                 // debugger
                 // console.log(newfn)
