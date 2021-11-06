@@ -16,9 +16,8 @@ import DisplayAvatar from './pages/displayavatar';
 import Proposals from './pages/proposals';
 import PrivateRoute from './components/privateroute';
 
-const url = (process.env.NODE_ENV === 'production')? 
-  'https://kraken-api.herokuapp.com/':'http://localhost:3000/' 
-
+const url = (process.env.NODE_ENV === 'production')?
+  process.env.URL:'http://localhost:3000/' 
 
 function NoMatch(){
   return(
