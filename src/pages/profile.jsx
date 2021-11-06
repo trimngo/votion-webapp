@@ -5,14 +5,14 @@ import {
   } from "@giphy/react-components";
   import { GiphyFetch } from "@giphy/js-fetch-api";
 import { useAsync } from "react-async-hook";
-import { IGif } from "@giphy/js-types";
+//import { IGif } from "@giphy/js-types";
 
 const apikey = "sXpGFDGZs0Dv1mmNFvYaGUvYwKX0PWIh"
 const giphyFetch = new GiphyFetch(apikey);
 
 
 function GifDemo() {
-    const [gif, setGif] = useState<IGif | null>(null);
+    const [gif, setGif] = useState(null);
     useAsync(async () => {
         const { data } = await giphyFetch.gif("fpXxIjftmkk9y");
         setGif(data);
