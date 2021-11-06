@@ -16,8 +16,9 @@ import DisplayAvatar from './pages/displayavatar';
 import Proposals from './pages/proposals';
 import PrivateRoute from './components/privateroute';
 
+debugger
 const url = (process.env.NODE_ENV === 'production')?
-  process.env.API_URL:'http://localhost:3000/' 
+  process.env.URL:'http://localhost:3000/' 
 
 function NoMatch(){
   return(
