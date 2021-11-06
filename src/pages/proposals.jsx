@@ -1,4 +1,4 @@
-import {url} from '../app';
+import {api_url} from '../app';
 import React, {useState, useEffect} from 'react';
 
 
@@ -20,7 +20,7 @@ function CreateProposal(props){
         debugger
         const token = localStorage.getItem("token")
         evt.preventDefault() //what is this for?
-        fetch(url + 'proposals', {
+        fetch(api_url + 'proposals', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -140,7 +140,7 @@ function Proposals(props) {
     const [proposals, setProposals] = useState([])
     const UpdateProposals = () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals' , {
+        return fetch(api_url + 'proposals' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -162,7 +162,7 @@ function Proposals(props) {
     const [singleProposal, setSingleProposal] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/2' , {
+        return fetch(api_url + 'proposals/2' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -180,7 +180,7 @@ function Proposals(props) {
     const [votes, setVotes] = useState([])
     useEffect( () => {
         const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/2/votes' , {
+        return fetch(api_url + 'proposals/2/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -197,7 +197,7 @@ function Proposals(props) {
 
     const handleSubmit = (votetype) => {
         const token = localStorage.getItem("token")
-        fetch(url + 'proposals/2/votes', {
+        fetch(api_url + 'proposals/2/votes', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -210,7 +210,7 @@ function Proposals(props) {
         .then(data => {
             console.log(data)
             
-            fetch(url + 'proposals/2/votes' , {
+            fetch(api_url + 'proposals/2/votes' , {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

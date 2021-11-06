@@ -1,4 +1,4 @@
-import {url} from '../app'
+import {api_url} from '../app'
 import React, {useState, useEffect} from 'react';
 import {
     Gif,
@@ -27,7 +27,7 @@ function Profile(){
     const getUserData = async () => {
         const id = localStorage.getItem("id")
     
-        const resp = await fetch(url + 'users/' + id, {
+        const resp = await fetch(api_url + 'users/' + id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -67,7 +67,7 @@ function Profile(){
                 const id = localStorage.getItem("id")
                 // user.name = params['user'].key?('name') ? params['user']['name'] : user.name
                 // user.icon_url = params['user'].key?('icon_url') ? params['user']['icon_url'] : user.icon_url
-                return fetch(url + 'users/' + id , {
+                return fetch(api_url + 'users/' + id , {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -84,7 +84,7 @@ function Profile(){
                     setUserInfo(data)
                 })
                 .then( data => {
-                    return fetch(url + 'users/' + id , {
+                    return fetch(api_url + 'users/' + id , {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
@@ -109,7 +109,7 @@ function Profile(){
                 // console.log(newfn)
                 return newfn
             }}
-            server={url}
+            server={api_url}
             // inputRef={cmp => this.uploadInput = cmp}
             autoUpload={true}
             />

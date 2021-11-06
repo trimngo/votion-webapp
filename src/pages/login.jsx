@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React, {useState, useEffect} from 'react';
-import {url} from '../app';
+import {api_url} from '../app';
 /*
   This example requires Tailwind CSS v2.0+ 
   
@@ -24,6 +24,8 @@ export default function Login(props) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  console.log('ENV:'+ JSON.stringify(process.env))
+
   const handleEmailChange = (evt) => {
       setEmail(evt.target.value)
   }
@@ -33,7 +35,7 @@ export default function Login(props) {
   }
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    fetch(url + 'authenticate', {
+    fetch(api_url + 'authenticate', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -48,7 +50,6 @@ export default function Login(props) {
     .then(data => {
         localStorage.setItem("token", data.auth_token)
         localStorage.setItem("id", data.id)
-        console.log('URL:'+ url)
         props.handleLogin(data.user)
         return data;
     })

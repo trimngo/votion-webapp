@@ -16,7 +16,7 @@ import DisplayAvatar from './pages/displayavatar';
 import Proposals from './pages/proposals';
 import PrivateRoute from './components/privateroute';
 
-const url = (process.env.NODE_ENV === 'production')?
+const api_url = (process.env.NODE_ENV === 'production')?
   process.env.API_URL:'http://localhost:3000/' 
 
 function NoMatch(){
@@ -52,4 +52,4 @@ function App() {
 }
 
 export default App;
-export {url};
+export {api_url};

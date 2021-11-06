@@ -3,7 +3,7 @@
 
 // If they are: they proceed to the page
 // If not: they are redirected to the login page.
-import {url} from '../app';
+import {api_url} from '../app';
 import { Redirect, Route } from 'react-router-dom'
 import React, {useState, useEffect} from 'react';
 
@@ -17,7 +17,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     // send jwt to API to see if it's valid
     let token = localStorage.getItem("token");
     if (token) {
-      fetch(url+ '/is_token_valid', {
+      fetch(api_url+ '/is_token_valid', {
         method: "GET",
         headers: {
           'Accept': 'application/json',

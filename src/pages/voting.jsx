@@ -1,4 +1,4 @@
-import {url} from '../app';
+import {api_url} from '../app';
 import React, {useState, useEffect} from 'react';
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
@@ -82,7 +82,7 @@ function Profile(){
   useEffect( () => {
       const id = localStorage.getItem("id")
   
-      return fetch(url + 'users/' + id , {
+      return fetch(api_url + 'users/' + id , {
           method: "GET",
           headers: {
               "Content-Type": "application/json",
@@ -122,7 +122,7 @@ function RenderUsers(users_id) {
   useEffect( () => {
       const id = localStorage.getItem("id")
   
-      return fetch(url + 'users/' + user_id , {
+      return fetch(api_url + 'users/' + user_id , {
           method: "GET",
           headers: {
               "Content-Type": "application/json",
@@ -154,7 +154,7 @@ function RenderUsersImg(users_id) {
   useEffect( () => {
       const id = localStorage.getItem("id")
   
-      return fetch(url + 'users/' + user_id , {
+      return fetch(api_url + 'users/' + user_id , {
           method: "GET",
           headers: {
               "Content-Type": "application/json",
@@ -296,7 +296,7 @@ function Voting(props) {
       
 
       const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/' + id , {
+        return fetch(api_url + 'proposals/' + id , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -315,7 +315,7 @@ function Voting(props) {
     useEffect( () => {
 
       const token = localStorage.getItem("token")
-        return fetch(url + 'proposals/' + id +'/votes' , {
+        return fetch(api_url + 'proposals/' + id +'/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -333,7 +333,7 @@ function Voting(props) {
     const [proposalID, setUserInfo] = useState({})
     useEffect( () => {
     
-        return fetch(url + 'proposals/' + id , {
+        return fetch(api_url + 'proposals/' + id , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -349,7 +349,7 @@ function Voting(props) {
 
   const handleSubmit = (votetype) => {
     const token = localStorage.getItem("token")
-    fetch(url + 'proposals/' + id +'/votes', {
+    fetch(api_url + 'proposals/' + id +'/votes', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -363,7 +363,7 @@ function Voting(props) {
         console.log(data)
       
 
-        fetch(url + 'proposals/'+ id +'/votes' , {
+        fetch(api_url + 'proposals/'+ id +'/votes' , {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
