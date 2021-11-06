@@ -48,6 +48,7 @@ export default function Login(props) {
     .then(data => {
         localStorage.setItem("token", data.auth_token)
         localStorage.setItem("id", data.id)
+        console.log('URL:'+ url)
         props.handleLogin(data.user)
         return data;
     })
