@@ -16,8 +16,7 @@ import DisplayAvatar from './pages/displayavatar';
 import Proposals from './pages/proposals';
 import PrivateRoute from './components/privateroute';
 
-const api_url = (process.env.NODE_ENV === 'production')?
-  process.env.REACT_APP_API_URL:'http://localhost:3000/' 
+const api_url = process.env.REACT_APP_API_URL
 
 function NoMatch(){
   return(

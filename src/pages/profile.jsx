@@ -7,7 +7,7 @@ import {
 import { useAsync } from "react-async-hook";
 //import { IGif } from "@giphy/js-types";
 
-const apikey = "sXpGFDGZs0Dv1mmNFvYaGUvYwKX0PWIh"
+const apikey = process.env.REACT_APP_GIPHY_API_KEY
 const giphyFetch = new GiphyFetch(apikey);
 
 
