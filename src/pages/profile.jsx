@@ -19,8 +19,8 @@ function RenderUser(props){
         img = <Gif gif={props.ui.user.icon_gif} width={300}/>     
     } 
     else{
-        img=<img src={props.icon_url}
-            alt={props.icon_url} width={width} height={height} />
+        img=<img src={props.ui.user.icon_url}
+            alt={props.ui.user.icon_url} width={width} height={height} />
     }
     
     return(
