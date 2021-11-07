@@ -23,14 +23,17 @@ function RenderGiphy(props) {
 function RenderUserIcon(props){
     const width="193"
     const height="130"
+    let profile_image
+    debugger
+    if(props.icon_url.toLowerCase().startsWith('http')){
+        profile_image=<img src={props.icon_url} alt={props.icon_url} width={width} height={height} />
+    }
+    else{
+        profile_image=<RenderGiphy giphyID={props.icon_url} width={width} />
+    }
     return(
         <div>
-        {
-            (props.icon_url.toLowerCase().startsWith('http'))?
-                <img src={props.icon_url}
-                        alt={props.icon_url} width={width} height={height} />:
-                <RenderGiphy giphyID={props.icon_url} width={width} />
-        }
+            {profile_image}        
         </div>
     )
     
@@ -51,6 +54,7 @@ function Profile(){
         });
         const data = await resp.json();
         console.log(data);
+        data.user.icon_url="l41Yt8W2i7QxmGaic"
         setUserInfo(data);
     }
     
