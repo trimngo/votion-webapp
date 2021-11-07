@@ -4,44 +4,17 @@ import {
     Gif,
   } from "@giphy/react-components";
   import { GiphyFetch } from "@giphy/js-fetch-api";
-import { useAsync } from "react-async-hook";
+// import { useAsync } from "react-async-hook";
 //import { IGif } from "@giphy/js-types";
 
 const apikey = process.env.REACT_APP_GIPHY_API_KEY
 const giphyFetch = new GiphyFetch(apikey);
 
-function RenderGiphy(props) {
-    const [gif, setGif] = useState(null);
-    useAsync(async () => {
-        const { data } = await giphyFetch.gif(props.giphyID);
-        setGif(data);
-    }, []);
-
-    return gif && <Gif gif={gif} width={props.width} />;
-}
-
-function RenderUserIcon(props){
-    const width="193"
-    const height="130"
-    let profile_image
-    debugger
-    if(props.icon_url.toLowerCase().startsWith('http')){
-        profile_image=<img src={props.icon_url} alt={props.icon_url} width={width} height={height} />
-    }
-    else{
-        profile_image=<RenderGiphy giphyID={props.icon_url} width={width} />
-    }
-    return(
-        <div>
-            {profile_image}        
-        </div>
-    )
-    
-
-}
-
 function Profile(){
+    const width=193
+    const height=130
     const [userInfo, setUserInfo] = useState({user:{icon_url:""}})
+    const [giphyData, setGiphyData] = useState(null)
     const getUserData = async () => {
         const id = localStorage.getItem("id")
     
@@ -54,8 +27,15 @@ function Profile(){
         });
         const data = await resp.json();
         console.log(data);
-        data.user.icon_url="l41Yt8W2i7QxmGaic"
+        // data.user.icon_url="l41Yt8W2i7QxmGaic"
         setUserInfo(data);
+
+        //get data for the user profile image
+        if(data.user.icon_url && !(data.user.icon_url?.toLowerCase().startsWith('http'))){
+            const gdata = await giphyFetch.gif(data.user.icon_url);
+            setGiphyData(gdata)
+            // console.log(JSON.stringify(gdata));
+        }
     }
     
     useEffect( () => {getUserData()} , [])
@@ -67,7 +47,10 @@ function Profile(){
     var query_params;
     return(
         <div>
-            <RenderUserIcon icon_url={userInfo?.user?.icon_url}/>
+            {(giphyData)? 
+                <Gif gif={giphyData.data} width={300}/>:
+                <img src={userInfo.user.icon_url}
+                        alt={userInfo.user.icon_url} width={width} height={height} /> }
             <pre>{JSON.stringify(userInfo, null, 2)} </pre>
             
         <ReactS3Uploader
