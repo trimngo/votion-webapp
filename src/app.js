@@ -44,7 +44,7 @@ function App() {
         <PrivateRoute path='/voting/:id' component={Voting} />
         <Route path='/displayavatar' component={DisplayAvatar} />
         <PrivateRoute path="/profile" component={Profile} />
-        <PrivateRoute path="/renderuserexample" component={RenderUserExample} />
+        <PrivateRoute path="/renderuserexample/:id" component={RenderUserExample} />
         <PrivateRoute path="/proposals" component={Proposals} />
         <Route component={NoMatch}/>
       </Switch>

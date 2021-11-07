@@ -4,6 +4,7 @@ import {
     Gif,
   } from "@giphy/react-components";
   import { GiphyFetch } from "@giphy/js-fetch-api";
+import { useParams } from "react-router-dom";
 
 const apikey = process.env.REACT_APP_GIPHY_API_KEY
 const giphyFetch = new GiphyFetch(apikey);
@@ -60,8 +61,9 @@ const getUserData = (id) => {
 }
 
 function RenderUserExample(){
+    const params = useParams();
+    var userID = params.id;
     const [userInfo, setUsersInfo] = useState({})
-    var userID = 4;
     useEffect( () => {
         getUserData(userID)
         .then( result =>setUsersInfo(result))
