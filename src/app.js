@@ -12,6 +12,7 @@ import Create from './pages/create';
 import ForgotPass from './pages/forgotpass';
 import Login from './pages/login';
 import Profile from './pages/profile';
+import RenderUserExample from './pages/renderuserexample';
 import DisplayAvatar from './pages/displayavatar';
 import Proposals from './pages/proposals';
 import PrivateRoute from './components/privateroute';
@@ -43,6 +44,7 @@ function App() {
         <PrivateRoute path='/voting/:id' component={Voting} />
         <Route path='/displayavatar' component={DisplayAvatar} />
         <PrivateRoute path="/profile" component={Profile} />
+        <PrivateRoute path="/renderuserexample" component={RenderUserExample} />
         <PrivateRoute path="/proposals" component={Proposals} />
         <Route component={NoMatch}/>
       </Switch>
