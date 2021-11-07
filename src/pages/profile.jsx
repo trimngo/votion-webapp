@@ -10,17 +10,32 @@ import { useAsync } from "react-async-hook";
 const apikey = process.env.REACT_APP_GIPHY_API_KEY
 const giphyFetch = new GiphyFetch(apikey);
 
-
-function GifDemo() {
+function RenderGiphy(props) {
     const [gif, setGif] = useState(null);
     useAsync(async () => {
-        const { data } = await giphyFetch.gif("fpXxIjftmkk9y");
+        const { data } = await giphyFetch.gif(props.giphyID);
         setGif(data);
     }, []);
 
-    return gif && <Gif gif={gif} width={200} />;
+    return gif && <Gif gif={gif} width={props.width} />;
 }
 
+function RenderUserIcon(props){
+    const width="193"
+    const height="130"
+    return(
+        <div>
+        {
+            (props.icon_url.toLowerCase().startsWith('http'))?
+                <img src={props.icon_url}
+                        alt={props.icon_url} width={width} height={height} />:
+                <RenderGiphy giphyID={props.icon_url} width={width} />
+        }
+        </div>
+    )
+    
+
+}
 
 function Profile(){
     const [userInfo, setUserInfo] = useState({user:{icon_url:""}})
@@ -48,9 +63,7 @@ function Profile(){
     var query_params;
     return(
         <div>
-            <GifDemo />
-            <img src={userInfo?.user?.icon_url}
-                alt={userInfo?.user?.icon_url} width="193" height="130" />
+            <RenderUserIcon icon_url={userInfo?.user?.icon_url}/>
             <pre>{JSON.stringify(userInfo, null, 2)} </pre>
             
         <ReactS3Uploader
