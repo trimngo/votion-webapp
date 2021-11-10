@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 import {api_url} from '../app';
+import votion_logo from '../images/votion_logo.png';
 /*
   This example requires Tailwind CSS v2.0+ 
   
@@ -66,17 +67,14 @@ export default function Login(props) {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        {/* <img
-          className="mx-auto h-12 w-auto"
-          src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+        <img
+          className="mx-auto h-20 w-auto"
+          src={votion_logo}
           alt="Workflow"
-        /> */}
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+        />
+        <h2 className="mt-6 text-center text-4xl font-extrabold text-gray-900">Votion!</h2>
         <p className="mt-2 text-center text-sm text-gray-600 max-w">
-          Or{' '}
-          <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-            start your 14-day free trial
-          </a>
+          Sign into your account
         </p>
       </div>
 
